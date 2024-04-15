@@ -13,14 +13,18 @@ class TextInput:
         # Definir a posição e a cor do retângulo
         self.size = 100
         self.top_left     = (50, 50)
-        self.bottom_right = (self.size + self.top_left[0], int(self.size*0.5) + self.top_left[1])
-        self.radius       = int(self.size*0.16)
-        self.color        = (255, 0, 0)  # Cor azul
+        self.bottom_right = (self.size + self.top_left[0], int(self.size*0.4) + self.top_left[1])
+        self.radius       = int(self.size*0.12)
+        self.color        = (255, 255, 255)  # Cor azul
 
     def setPose(self, pose):
-        half = int(self.size*0.5)
-        self.top_left     = (pose[0]-half, pose[1]-half)
-        self.bottom_right = (pose[0]+half, pose[1]+half)
+        self.top_left     = pose
+        self.bottom_right = (self.size + self.top_left[0], int(self.size*0.4) + self.top_left[1])
+    
+    def mouseIsAbove(self, x, y):
+        if ((x>=(self.top_left[0]-self.size*0.12)) and (x<=(self.bottom_right[0]+self.size*0.12))) and ((y>=(self.top_left[1]-self.size*0.12)) and (y<=(self.bottom_right[1]+self.size*0.12))):
+            return True
+        return False
     
     def draw_rounded_rectangle(self, img, top_left, bottom_right, radius, color, thickness):
         """ Desenha um retângulo com bordas arredondadas.
@@ -50,8 +54,26 @@ class TextInput:
         cv2.circle(img, (top_left_inner[0], bottom_right_inner[1]), radius, color, thickness)
         cv2.circle(img, bottom_right_inner, radius, color, thickness)
     
+    def printText(self, img, text):
+        cv2.putText(img, text, 
+                self.top_left, 
+                cv2.FONT_HERSHEY_SIMPLEX, 
+                0.6,
+                (30, 30, 30),
+                2,
+                1)
+
+    def animaText(self):
+        text = "|"
+        self.printText(text)
+        
+    
     def background(self, img):
         self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, self.color, -1)
+
+    def show(self, img, x, y):
+        color = self.color if self.mouseIsAbove(x, y) else (200, 200, 200)
+        self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, color, -1)
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

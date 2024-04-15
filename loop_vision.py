@@ -38,6 +38,9 @@ PC = PlayPause(pose=(20,20), size=30)
 CS = Cursor()
 TI = TextInput()
 
+# Text Imput pose
+TI.setPose((30, 400))
+
 def rotate_point(point, angle, center):
     angle_rad = np.radians(angle)
     x, y = point[0] - center[0], point[1] - center[1]
@@ -320,7 +323,8 @@ while True:
 
         # Text camp
         if plot_text_camp:
-            TI.background(frame_lines)
+            # TI.background(frame_lines)
+            TI.show(frame_lines, x_mouse, y_mouse)
 
         # Show frame
         cv2.imshow('OptiMeasure Pro', frame_lines)

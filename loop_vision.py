@@ -126,15 +126,6 @@ cv2.createTrackbar('Filter', 'HSV Controls', area_threshold, 3000, update_hsv_va
 last_frame = None
 last_angulo = 0
 
-
-# # Exemplo de uso:
-# polygon_coords = [(0, 0), (500, 0), (500, 500), (0, 500)]
-# x_value = (3, 0)
-# intersection_points = find_intersection_points(x_value, polygon_coords, 0)
-# print(intersection_points)
-# print(find_rect_polygon(polygon_coords))
-
-
 while True:
     try:
         # Capture a frame from the video

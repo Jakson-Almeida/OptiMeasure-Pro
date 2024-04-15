@@ -16,6 +16,7 @@ class TextInput:
         self.bottom_right = (self.size + self.top_left[0], int(self.size*0.4) + self.top_left[1])
         self.radius       = int(self.size*0.12)
         self.color        = (255, 255, 255)  # Cor azul
+        self.time_init = time.time()
 
     def setPose(self, pose):
         self.top_left     = pose
@@ -54,19 +55,24 @@ class TextInput:
         cv2.circle(img, (top_left_inner[0], bottom_right_inner[1]), radius, color, thickness)
         cv2.circle(img, bottom_right_inner, radius, color, thickness)
     
-    def printText(self, img, text):
+    def printText(self, img, text, poseText):
         cv2.putText(img, text, 
-                self.top_left, 
+                poseText, 
                 cv2.FONT_HERSHEY_SIMPLEX, 
                 0.6,
                 (30, 30, 30),
                 2,
                 1)
 
-    def animaText(self):
+    def animaText(self, img, text, pose):
+        kTime = 0.3
+        totalTime = 0.8
         text = "|"
-        self.printText(text)
-        
+        if(time.time() - self.time_init <= kTime*totalTime):
+            self.printText(img, text, pose)
+        if(time.time() - self.time_init >= totalTime):
+            self.time_init = time.time()
+
     
     def background(self, img):
         self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, self.color, -1)
@@ -74,6 +80,9 @@ class TextInput:
     def show(self, img, x, y):
         color = self.color if self.mouseIsAbove(x, y) else (200, 200, 200)
         self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, color, -1)
+        if self.mouseIsAbove(x, y):
+            cv2.line(img, (self.top_left[0], self.bottom_right[1]-10), (self.top_left[0]+self.size, self.bottom_right[1]-10), (90, 90, 90), 1)
+            self.animaText(img, "Texto", (self.top_left[0]+10, self.bottom_right[1]-18))
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

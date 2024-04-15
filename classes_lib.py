@@ -67,10 +67,9 @@ class TextInput:
     def animaText(self, img, text, pose):
         kTime = 0.3
         totalTime = 0.8
-        text = "|"
         if(time.time() - self.time_init <= kTime*totalTime):
             self.printText(img, text, pose)
-        if(time.time() - self.time_init >= totalTime):
+        elif(time.time() - self.time_init >= totalTime):
             self.time_init = time.time()
 
     
@@ -82,7 +81,7 @@ class TextInput:
         self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, color, -1)
         if self.mouseIsAbove(x, y):
             cv2.line(img, (self.top_left[0], self.bottom_right[1]-10), (self.top_left[0]+self.size, self.bottom_right[1]-10), (90, 90, 90), 1)
-            self.animaText(img, "Texto", (self.top_left[0]+10, self.bottom_right[1]-18))
+            self.animaText(img, "|", (self.top_left[0]+10, self.bottom_right[1]-18))
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

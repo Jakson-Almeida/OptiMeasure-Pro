@@ -327,9 +327,9 @@ while True:
 
         # Press the 'q' key to exit the loop
         key = cv2.waitKey(1) & 0xFF
-        if plot_text_camp:
+        if plot_text_camp and TI.mouseIsAbove(x_mouse, y_mouse):
             TI.textInput(key)
-        if key == ord('q'):
+        elif key == ord('q'):
             break
         elif key == ord('p'):
             plot_polygon = not plot_polygon

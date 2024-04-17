@@ -350,7 +350,7 @@ while True:
             plot_filtered_mask = not plot_filtered_mask
         elif key == ord('t'):
             plot_text_camp = not plot_text_camp
-        elif key == ord('s'):
+        if key == ord('s'):
             # Obter a data e hora atual
             now = datetime.datetime.now()
             # Formatar a data e hora para usar no nome do arquivo

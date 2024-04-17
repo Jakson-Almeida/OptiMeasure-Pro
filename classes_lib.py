@@ -102,7 +102,9 @@ class TextInput:
             if self.text == "":
                 self.animaText(img, "|", (self.top_left[0]+10, self.bottom_right[1]-18))
             else:
-                self.printText(img, self.text, (self.top_left[0]+10, self.bottom_right[1]-18))
+                fiber_size = int(self.text)/100.0
+                text = format(fiber_size, ".2f")
+                self.printText(img, text.zfill(6)+"u", (self.top_left[0]+10, self.bottom_right[1]-18))
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

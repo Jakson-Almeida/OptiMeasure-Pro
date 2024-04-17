@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import math
 import time
-import pygame
+import re
 from shapely.geometry import Polygon, LineString, MultiPoint, Point
 
 class TextInput:
@@ -26,6 +26,15 @@ class TextInput:
             print("Texto finalizado:", self.text)
         elif 32 <= key <= 126:
             self.text += chr(key)
+            self.text = self.filter_numerics(self.text)
+            self.text = self.text[:5]
+    
+    def filter_numerics(self, input_string):
+        # Utiliza uma expressão regular para encontrar todos os dígitos na string
+        filtered = re.findall(r'\d', input_string)
+        # Junta todos os dígitos encontrados em uma nova string
+        numeric_string = ''.join(filtered)
+        return numeric_string
 
     def setPose(self, pose):
         self.top_left     = pose

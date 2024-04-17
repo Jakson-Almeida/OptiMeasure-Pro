@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import math
 import time
+import pygame
 from shapely.geometry import Polygon, LineString, MultiPoint, Point
 
 class TextInput:
@@ -17,6 +18,19 @@ class TextInput:
         self.radius       = int(self.size*0.12)
         self.color        = (255, 255, 255)  # Cor azul
         self.time_init = time.time()
+
+    def textInput(self):
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    # Remove o último caractere
+                    self.text = self.text[:-1]
+                elif event.key == pygame.K_RETURN:
+                    # Encerra a entrada de texto
+                    print("Texto finalizado:", self.text)
+                else:
+                    # Adiciona o novo caractere
+                    self.text += event.unicode
 
     def setPose(self, pose):
         self.top_left     = pose

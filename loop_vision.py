@@ -313,6 +313,8 @@ while True:
         PC.show()
 
         # Text camp
+        if not plot_text_camp:
+            plot_text_camp = TI.mouseIsAbove(x_mouse, y_mouse)
         if plot_text_camp:
             # TI.background(frame_lines)
             TI.show(frame_lines, x_mouse, y_mouse)

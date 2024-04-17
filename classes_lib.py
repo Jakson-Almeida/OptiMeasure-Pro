@@ -19,18 +19,13 @@ class TextInput:
         self.color        = (255, 255, 255)  # Cor azul
         self.time_init = time.time()
 
-    def textInput(self):
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_BACKSPACE:
-                    # Remove o último caractere
-                    self.text = self.text[:-1]
-                elif event.key == pygame.K_RETURN:
-                    # Encerra a entrada de texto
-                    print("Texto finalizado:", self.text)
-                else:
-                    # Adiciona o novo caractere
-                    self.text += event.unicode
+    def textInput(self, key):
+        if key == ord('\x08'):
+            self.text = self.text[:-1]
+        elif key == ord('\r'):
+            print("Texto finalizado:", self.text)
+        elif 32 <= key <= 126:
+            self.text += chr(key)
 
     def setPose(self, pose):
         self.top_left     = pose
@@ -95,7 +90,10 @@ class TextInput:
         self.draw_rounded_rectangle(img, self.top_left, self.bottom_right, self.radius, color, -1)
         if self.mouseIsAbove(x, y):
             cv2.line(img, (self.top_left[0], self.bottom_right[1]-10), (self.top_left[0]+self.size, self.bottom_right[1]-10), (90, 90, 90), 1)
-            self.animaText(img, "|", (self.top_left[0]+10, self.bottom_right[1]-18))
+            if self.text == "":
+                self.animaText(img, "|", (self.top_left[0]+10, self.bottom_right[1]-18))
+            else:
+                self.printText(img, self.text, (self.top_left[0]+10, self.bottom_right[1]-18))
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

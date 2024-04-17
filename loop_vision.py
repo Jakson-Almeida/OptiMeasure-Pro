@@ -327,6 +327,8 @@ while True:
 
         # Press the 'q' key to exit the loop
         key = cv2.waitKey(1) & 0xFF
+        if plot_text_camp:
+            TI.textInput(key)
         if key == ord('q'):
             break
         elif key == ord('p'):

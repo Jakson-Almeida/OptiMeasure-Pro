@@ -173,6 +173,7 @@ class Cursor:
         self.p1_reference = self.p1
         self.started_reference = False
         self.percentual = 100
+        self.micro_size = 62.5
 
     def update_parameters(self, polygon, mouse_x=0, mouse_y=0, angle=0, set_reference=False, mask=None):
         polygon = compact_list(polygon)

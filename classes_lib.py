@@ -179,7 +179,7 @@ class Cursor:
         self.micro_size = size
 
     def get_current_micro_size(self):
-        return self.percentual*self.micro_size
+        return self.percentual*self.micro_size/100.0
 
     def update_parameters(self, polygon, mouse_x=0, mouse_y=0, angle=0, set_reference=False, mask=None):
         polygon = compact_list(polygon)

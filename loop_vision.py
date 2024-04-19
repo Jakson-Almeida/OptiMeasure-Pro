@@ -28,7 +28,7 @@ SPACE_KEY_CLICKED = False
 
 # OpenCV text
 font      = cv2.FONT_HERSHEY_SIMPLEX
-fontScale = 0.7
+fontScale = 0.6
 fontColor     = ( 30,  30,  30)
 fontColorDark = (210, 210, 210)
 thickness = 2
@@ -283,12 +283,13 @@ while True:
         if fiber_finded and fiber_detect:
             CS.show(frame_lines, plot_mask=(plot_mask and plot_contours), show_reference=not video_play)
             # OpenCV text
+            CS.set_micro_size(TI.fiber_size)
             point_down = find_LEFTDOWN_Point(compact_list(bounding_polygon))
             bottomLeftCornerOfText = (int(point_down[0] + 30), int(point_down[1] - 30))
             fontColorSelected = fontColorDark if plot_mask else fontColor
             # second = (bottomLeftCornerOfText[0] + int(150*np.cos(angle*np.pi/180.0)), bottomLeftCornerOfText[1] + int(150*np.sin(angle*np.pi/180.0)))
             # cv2.line(frame_lines, bottomLeftCornerOfText, second, (10, 100, 100), 3)
-            cv2.putText(frame_lines,'Fiber size: {:3.0f} pixels'.format(CS.size), 
+            cv2.putText(frame_lines,'Fiber size: {:3.2f}u'.format(CS.get_current_micro_size()), 
                 bottomLeftCornerOfText, 
                 font, 
                 fontScale,

@@ -18,12 +18,19 @@ class TextInput:
         self.radius       = int(self.size*0.12)
         self.color        = (255, 255, 255)  # Cor azul
         self.time_init = time.time()
+        self.fiber_size = 62.50 # micrommeter
 
     def textInput(self, key):
         if key == ord('\x08'):
             self.text = self.text[:-1]
         elif key == ord('\r'):
-            print("Texto finalizado:", self.text)
+            self.fiber_size = int(self.text)/100.0
+            text = format(self.fiber_size, ".2f")
+            print("Fiber size:", text+"u")
+        elif key == ord('d'):
+            self.fiber_size = 62.50
+            text = format(self.fiber_size, ".2f")
+            print("Default fiber size:", text+"u")
         elif 32 <= key <= 126:
             self.text += chr(key)
             self.text = self.filter_numerics(self.text)
@@ -105,6 +112,10 @@ class TextInput:
                 fiber_size = int(self.text)/100.0
                 text = format(fiber_size, ".2f")
                 self.printText(img, text.zfill(6)+"u", (self.top_left[0]+10, self.bottom_right[1]-18))
+        else:
+            text = format(self.fiber_size, ".2f")
+            self.printText(img, text.zfill(6)+"u", (self.top_left[0]+10, self.bottom_right[1]-18))
+
 
 class PlayPause:
     def __init__(self, frame=None, pose=(0, 0), size=100, color = (40, 40, 40), thickness = cv2.FILLED):

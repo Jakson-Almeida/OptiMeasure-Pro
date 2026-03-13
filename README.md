@@ -24,10 +24,6 @@ OptiMeasure Pro is a research tool for real-time optical fiber thickness measure
 - [Configuration](#configuration)
 - [Project Structure](#project-structure)
 - [Building the Executable](#building-the-executable)
-- [Contribution](#contribution)
-- [Credits](#credits)
-- [License](#license)
-- [Contact](#contact)
 
 ## Requirements
 

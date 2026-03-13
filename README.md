@@ -37,7 +37,7 @@ OptiMeasure Pro is a research tool for real-time optical fiber thickness measure
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/<your-org>/OptiMeasure-Pro.git
+   git clone https://github.com/Jakson-Almeida/OptiMeasure-Pro.git
    cd OptiMeasure-Pro
    ```
 

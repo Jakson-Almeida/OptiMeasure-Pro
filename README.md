@@ -128,19 +128,3 @@ pyinstaller loop_vision.spec
 ```
 
 The executable is produced in `dist/` (name from the spec, e.g. `loop_vision.exe`). The spec references `micro.ico` for the icon; ensure it exists or adjust the spec.
-
-## Contribution
-
-Contributions are welcome. Please open an issue or submit a pull request. When changing behavior of the measurement pipeline or UI, consider updating this README and docstrings in the code.
-
-## Credits
-
-Acknowledge here any individuals, institutions, or open-source projects that contributed to OptiMeasure Pro.
-
-## License
-
-This project’s license is not yet specified. Add a `LICENSE` file and update this section (e.g. MIT, Apache 2.0) when you choose one.
-
-## Contact
-
-How users can get in touch with you or the project team (e.g. GitHub issues, email).
